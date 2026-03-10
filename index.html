@@ -815,14 +815,25 @@
               <pre><code># macOS / Linux / WSL (권장)
 curl -fsSL https://claude.ai/install.sh | bash
 
-# Windows PowerShell
+# Windows PowerShell (권장)
 irm https://claude.ai/install.ps1 | iex
+
+# Windows CMD
+curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 
 # Homebrew (macOS)
 brew install --cask claude-code
 
 # WinGet (Windows)
 winget install Anthropic.ClaudeCode</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
+
+              <div class="warn-box" style="margin-top:12px;">
+                <strong>Windows 사용자:</strong> 설치 전 <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener noreferrer">Git for Windows</a>가 먼저 설치되어 있어야 합니다.
+              </div>
+
+              <h4>[Option] 설치 확인</h4>
+              <p>설치 후 아래 명령어로 설치 유형과 버전을 확인합니다:</p>
+              <pre><code>claude doctor</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
 
               <h4>Step 2 &mdash; 로그인</h4>
               <p>첫 실행 시 자동으로 로그인 화면이 나타납니다. Claude 구독(Pro, Max, Team, Enterprise) 또는 Anthropic Console 계정이 필요합니다.</p>
@@ -857,11 +868,15 @@ tail -f app.log | claude -p "이상 징후 발견 시 Slack으로 알려줘"
 claude -p "새 문자열을 한국어로 번역하고 PR 올려줘"</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
 
               <div class="warn-box">
-                <strong>요구 사항:</strong> Windows의 경우 Git for Windows 필수. macOS 13.0+, Windows 10 1809+, Ubuntu 20.04+. 4GB+ RAM.
+                <strong>요구 사항:</strong> macOS 13.0+, Windows 10 1809+, Ubuntu 20.04+. 4GB+ RAM.
               </div>
 
               <div class="tip-box">
-                <strong>자동 업데이트:</strong> Native Install로 설치하면 백그라운드에서 자동 업데이트됩니다. Homebrew/WinGet은 수동 업데이트가 필요합니다 (<span class="inline-code">brew upgrade claude-code</span>).
+                <strong>자동 업데이트:</strong> Native Install (curl/PowerShell/CMD)로 설치하면 백그라운드에서 자동 업데이트됩니다. Homebrew/WinGet은 수동 업데이트가 필요합니다 (<span class="inline-code">brew upgrade claude-code</span>).
+              </div>
+
+              <div class="tip-box">
+                <strong>더 알아보기:</strong> 설치 중 문제가 발생하면 <a href="https://code.claude.com/docs/ko/setup" target="_blank" rel="noopener noreferrer">공식 설치 가이드</a>를 참고하세요. Claude Code의 설치 및 활용 방법은 <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener noreferrer">claude.com/product/claude-code</a>에서도 확인할 수 있습니다.
               </div>
             </div>
           </div>
