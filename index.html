@@ -482,6 +482,7 @@
     .tag-essential { background: rgba(126,200,155,0.15); color: var(--accent-green); }
     .tag-power { background: rgba(212,165,116,0.15); color: var(--accent); }
     .tag-advanced { background: rgba(180,156,222,0.15); color: var(--accent-purple); }
+    .tag-skill { background: rgba(126,184,218,0.15); color: var(--accent-secondary); }
     .tag-new { background: rgba(232,136,136,0.15); color: var(--accent-red); }
 
     /* ── Table ── */
@@ -1170,9 +1171,9 @@ claude --remote "로그인 버그 수정해줘"</code><button class="copy-btn" a
             <span class="cmd-tag tag-power">Power</span>
           </div>
           <div class="cmd-card">
-            <div class="cmd-name" style="color:var(--accent)">/loop [interval] &lt;prompt&gt;</div>
+            <div class="cmd-name" style="color:var(--accent-secondary)">/loop [interval] &lt;prompt&gt;</div>
             <div class="cmd-desc">프롬프트를 주기적으로 반복 실행. 기본 10분 간격. /loop 5m check deploy</div>
-            <span class="cmd-tag tag-power">Power</span>
+            <span class="cmd-tag tag-skill">Skill</span>
           </div>
           <div class="cmd-card">
             <div class="cmd-name" style="color:var(--accent-purple)">/chrome</div>
@@ -1233,6 +1234,31 @@ claude --remote "로그인 버그 수정해줘"</code><button class="copy-btn" a
             <div class="cmd-name" style="color:var(--accent)">/export [filename]</div>
             <div class="cmd-desc">현재 대화를 텍스트 파일로 내보내기.</div>
             <span class="cmd-tag tag-power">Power</span>
+          </div>
+          <div class="cmd-card">
+            <div class="cmd-name" style="color:var(--accent-secondary)">/simplify</div>
+            <div class="cmd-desc">변경된 코드를 재사용성·품질·효율성 관점에서 리뷰. 3개 에이전트가 병렬 분석 후 문제를 자동 수정.</div>
+            <span class="cmd-tag tag-skill">Skill</span>
+          </div>
+          <div class="cmd-card">
+            <div class="cmd-name" style="color:var(--accent-secondary)">/batch &lt;instruction&gt;</div>
+            <div class="cmd-desc">5~30개의 격리된 worktree에서 대규모 변경을 오케스트레이션. 대규모 리팩토링·마이그레이션에 유용.</div>
+            <span class="cmd-tag tag-skill">Skill</span>
+          </div>
+          <div class="cmd-card">
+            <div class="cmd-name" style="color:var(--accent-secondary)">/claude-api</div>
+            <div class="cmd-desc">Claude API·Anthropic SDK·Agent SDK 관련 코드 작성 시 최신 레퍼런스를 자동 로드. <code>anthropic</code> import 시 자동 트리거.</div>
+            <span class="cmd-tag tag-skill">Skill</span>
+          </div>
+          <div class="cmd-card">
+            <div class="cmd-name" style="color:var(--accent-secondary)">/keybindings</div>
+            <div class="cmd-desc">키보드 단축키 커스터마이징. chord 바인딩 추가, 제출 키 변경, ~/.claude/keybindings.json 수정.</div>
+            <span class="cmd-tag tag-skill">Skill</span>
+          </div>
+          <div class="cmd-card">
+            <div class="cmd-name" style="color:var(--accent-secondary)">/statusline</div>
+            <div class="cmd-desc">상태줄 설정. 모델명, 컨텍스트 %, 현재 디렉토리, git 브랜치를 표시하도록 구성.</div>
+            <span class="cmd-tag tag-skill">Skill</span>
           </div>
         </div>
       </div>
@@ -1453,52 +1479,11 @@ claude --model claude-sonnet-4-6[1m]</code></pre>
       <div class="section-header">
         <div class="section-divider"></div>
         <h2>인기 Skills</h2>
-        <p>Claude Code에서 많이 사용하는 내장 스킬과 커스텀 스킬</p>
-      </div>
-
-      <h3 style="font-size:1.1rem; margin-bottom:20px; color:var(--accent);">내장 Skills (Built-in)</h3>
-      <div class="card-grid" style="margin-bottom:48px;">
-        <div class="feature-card">
-          <div class="feature-icon" style="background:rgba(126,200,155,0.15); color:var(--accent-green);">&#9881;</div>
-          <h4>/simplify</h4>
-          <p>변경된 코드를 재사용성, 품질, 효율성 관점에서 리뷰합니다. 3개의 리뷰 에이전트가 병렬로 분석 후 발견된 문제를 자동 수정합니다.</p>
-          <pre><code>/simplify</code></pre>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background:rgba(212,165,116,0.15); color:var(--accent);">&#9889;</div>
-          <h4>/batch &lt;instruction&gt;</h4>
-          <p>5~30개의 격리된 worktree에서 대규모 변경을 오케스트레이션합니다. 대규모 리팩토링이나 마이그레이션에 유용합니다.</p>
-          <pre><code>/batch 모든 컴포넌트를 TypeScript로 변환</code></pre>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background:rgba(126,184,218,0.15); color:var(--accent-secondary);">&#128270;</div>
-          <h4>/claude-api</h4>
-          <p>Claude API, Anthropic SDK, Agent SDK 관련 코드 작성 시 자동으로 최신 레퍼런스를 로드합니다. <span class="inline-code">anthropic</span> import 시 자동 트리거.</p>
-          <pre><code>/claude-api</code></pre>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background:rgba(180,156,222,0.15); color:var(--accent-purple);">&#128337;</div>
-          <h4>/loop [interval] &lt;prompt&gt;</h4>
-          <p>프롬프트를 주기적으로 반복 실행합니다. 배포 모니터링, 주기적 체크에 유용. 기본 10분 간격.</p>
-          <pre><code>/loop 5m 배포 상태 확인해줘
-/loop 30m /simplify</code></pre>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background:rgba(232,212,136,0.15); color:var(--accent-yellow);">&#9000;</div>
-          <h4>/keybindings</h4>
-          <p>키보드 단축키를 커스터마이징합니다. chord 바인딩 추가, 제출 키 변경, <span class="inline-code">~/.claude/keybindings.json</span> 수정을 도와줍니다.</p>
-          <pre><code>/keybindings</code></pre>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon" style="background:rgba(180,156,222,0.15); color:var(--accent-purple);">&#128218;</div>
-          <h4>/statusline</h4>
-          <p>상태줄을 설정합니다. 모델명, 컨텍스트 %, 현재 디렉토리, git 브랜치를 표시하도록 구성할 수 있습니다.</p>
-          <pre><code>/statusline</code></pre>
-        </div>
+        <p>직접 만드는 커스텀 스킬과 <a href="https://skills.sh" target="_blank" rel="noopener">skills.sh</a>의 인기 커뮤니티 스킬</p>
       </div>
 
       <h3 style="font-size:1.1rem; margin-bottom:20px; color:var(--accent);">커스텀 Skill 만들기</h3>
-      <div class="feature-card" style="max-width:700px;">
+      <div class="feature-card">
         <p style="margin-bottom:16px;">자신만의 스킬을 만들어 반복 작업을 자동화할 수 있습니다:</p>
         <pre><code># ~/.claude/skills/my-review/SKILL.md 생성
 
@@ -1589,7 +1574,7 @@ allowed-tools: Read, Grep, Bash
         <p>전문화된 AI 에이전트를 생성하고 Claude가 작업을 위임하게 만드세요</p>
       </div>
 
-      <div class="feature-card" style="max-width:800px; margin-bottom:40px;">
+      <div class="feature-card" style="margin-bottom:40px;">
         <p style="margin-bottom:16px;">
           <span class="inline-code">/agents</span>를 실행하면 전문화된 서브에이전트를 만들 수 있습니다. 각 에이전트는 <strong>독립된 컨텍스트 윈도우</strong>, <strong>커스텀 시스템 프롬프트</strong>, <strong>지정된 도구</strong>만을 가집니다. Claude는 작업 유형에 따라 적합한 에이전트에 자동으로 위임합니다.
         </p>
