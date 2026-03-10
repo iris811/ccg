@@ -35,6 +35,9 @@
       --shadow: 0 4px 24px rgba(0,0,0,0.3);
     }
 
+    a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(212,165,116,0.4); }
+    a:hover { color: var(--accent-secondary); text-decoration-color: var(--accent-secondary); }
+
     html { scroll-behavior: smooth; scroll-padding-top: 80px; }
     body {
       font-family: var(--font-sans);
@@ -1482,15 +1485,15 @@ claude --model claude-sonnet-4-6[1m]</code></pre>
         </div>
         <div class="feature-card">
           <div class="feature-icon" style="background:rgba(232,212,136,0.15); color:var(--accent-yellow);">&#9000;</div>
-          <h4>/keybindings-help</h4>
+          <h4>/keybindings</h4>
           <p>키보드 단축키를 커스터마이징합니다. chord 바인딩 추가, 제출 키 변경, <span class="inline-code">~/.claude/keybindings.json</span> 수정을 도와줍니다.</p>
-          <pre><code>/keybindings-help</code></pre>
+          <pre><code>/keybindings</code></pre>
         </div>
         <div class="feature-card">
           <div class="feature-icon" style="background:rgba(180,156,222,0.15); color:var(--accent-purple);">&#128218;</div>
-          <h4>/claude-code-guide</h4>
-          <p>Claude Code CLI 기능, hooks, slash 명령어, MCP 서버, 설정, IDE 연동에 대한 질문에 답합니다.</p>
-          <pre><code>/claude-code-guide</code></pre>
+          <h4>/statusline</h4>
+          <p>상태줄을 설정합니다. 모델명, 컨텍스트 %, 현재 디렉토리, git 브랜치를 표시하도록 구성할 수 있습니다.</p>
+          <pre><code>/statusline</code></pre>
         </div>
       </div>
 
