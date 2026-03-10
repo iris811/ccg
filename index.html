@@ -690,10 +690,14 @@
       .terminal-hero { margin-left: -8px; margin-right: -8px; border-radius: 8px; }
       .pixel-mascot { font-size: 0.5rem; }
       .cmd-grid { grid-template-columns: 1fr; }
-      .card-grid { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr !important; }
       section { padding: 50px 0; }
       .step-header { padding: 18px 20px; }
       .step-body { padding: 0 20px 20px; padding-top: 18px; }
+      /* Skills cards: stack vertically on mobile */
+      .skill-card-row { flex-direction: column !important; }
+      .skill-card-info { min-width: 0 !important; width: 100%; }
+      .skill-card-pre { width: 100% !important; box-sizing: border-box; white-space: pre; overflow-x: auto; }
     }
 
     /* ── Reduced Motion ── */
@@ -1427,7 +1431,7 @@ claude --model claude-sonnet-4-6[1m]</code></pre>
         <p>빠르고 효율적인 작업을 위한 핵심 단축키</p>
       </div>
 
-      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));">
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));">
         <!-- General -->
         <div class="feature-card">
           <h4 style="color:var(--accent-green)">일반 제어</h4>
@@ -1509,8 +1513,8 @@ allowed-tools: Read, Grep, Bash
         <a href="https://skills.sh" target="_blank" rel="noopener" style="color:var(--accent);">skills.sh</a>에서 커뮤니티 스킬을 검색하고 설치할 수 있습니다.
       </p>
       <div style="display:flex; flex-direction:column; gap:12px;">
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="min-width:240px;">
+        <div class="feature-card skill-card-row" style="display:flex; align-items:flex-start; gap:24px;">
+          <div class="skill-card-info" style="min-width:240px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
               <h4 style="margin:0;">&#128270; /find-skills</h4>
               <span style="font-size:0.75rem; color:var(--text-secondary);">482K installs</span>
@@ -1518,11 +1522,11 @@ allowed-tools: Read, Grep, Bash
             <p style="font-size:0.8rem; color:var(--text-dim); margin:0 0 4px;">vercel-labs/skills</p>
             <p style="font-size:0.85rem; color:var(--text-secondary); margin:0;">skills.sh에서 커뮤니티 스킬을 검색하고 발견합니다.</p>
           </div>
-          <pre style="flex:1; margin:0;"><code>npx skills add https://github.com/vercel-labs/skills \
-  --skill find-skills</code></pre>
+          <pre class="skill-card-pre" style="width:430px; flex-shrink:0; margin:0;"><code>npx skills add https://github.com/vercel-labs/skills \
+  --skill find-skills</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="min-width:240px;">
+        <div class="feature-card skill-card-row" style="display:flex; align-items:flex-start; gap:24px;">
+          <div class="skill-card-info" style="min-width:240px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
               <h4 style="margin:0;">&#9889; /vercel-react-best-practices</h4>
               <span style="font-size:0.75rem; color:var(--text-secondary);">192K installs</span>
@@ -1530,11 +1534,11 @@ allowed-tools: Read, Grep, Bash
             <p style="font-size:0.8rem; color:var(--text-dim); margin:0 0 4px;">vercel-labs/agent-skills</p>
             <p style="font-size:0.85rem; color:var(--text-secondary); margin:0;">React &amp; Next.js 성능 최적화 가이드라인. 번들 최적화, 데이터 패칭 패턴 검토.</p>
           </div>
-          <pre style="flex:1; margin:0;"><code>npx skills add https://github.com/vercel-labs/agent-skills \
-  --skill vercel-react-best-practices</code></pre>
+          <pre class="skill-card-pre" style="width:430px; flex-shrink:0; margin:0;"><code>npx skills add https://github.com/vercel-labs/agent-skills \
+  --skill vercel-react-best-practices</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="min-width:240px;">
+        <div class="feature-card skill-card-row" style="display:flex; align-items:flex-start; gap:24px;">
+          <div class="skill-card-info" style="min-width:240px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
               <h4 style="margin:0;">&#128065; /web-design-guidelines</h4>
               <span style="font-size:0.75rem; color:var(--text-secondary);">150K installs</span>
@@ -1542,11 +1546,11 @@ allowed-tools: Read, Grep, Bash
             <p style="font-size:0.8rem; color:var(--text-dim); margin:0 0 4px;">vercel-labs/agent-skills</p>
             <p style="font-size:0.85rem; color:var(--text-secondary); margin:0;">UI 코드를 웹 가이드라인 기준으로 리뷰. 접근성, UX, 디자인 모범 사례 자동 검사.</p>
           </div>
-          <pre style="flex:1; margin:0;"><code>npx skills add https://github.com/vercel-labs/agent-skills \
-  --skill web-design-guidelines</code></pre>
+          <pre class="skill-card-pre" style="width:430px; flex-shrink:0; margin:0;"><code>npx skills add https://github.com/vercel-labs/agent-skills \
+  --skill web-design-guidelines</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="min-width:240px;">
+        <div class="feature-card skill-card-row" style="display:flex; align-items:flex-start; gap:24px;">
+          <div class="skill-card-info" style="min-width:240px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
               <h4 style="margin:0;">&#127912; /frontend-design</h4>
               <span style="font-size:0.75rem; color:var(--text-secondary);">138K installs</span>
@@ -1554,11 +1558,11 @@ allowed-tools: Read, Grep, Bash
             <p style="font-size:0.8rem; color:var(--text-dim); margin:0 0 4px;">anthropics/skills</p>
             <p style="font-size:0.85rem; color:var(--text-secondary); margin:0;">프론트엔드 디자인 패턴과 컴포넌트 설계 가이드라인. Anthropic 공식 제공.</p>
           </div>
-          <pre style="flex:1; margin:0;"><code>npx skills add https://github.com/anthropics/skills \
-  --skill frontend-design</code></pre>
+          <pre class="skill-card-pre" style="width:430px; flex-shrink:0; margin:0;"><code>npx skills add https://github.com/anthropics/skills \
+  --skill frontend-design</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="min-width:240px;">
+        <div class="feature-card skill-card-row" style="display:flex; align-items:flex-start; gap:24px;">
+          <div class="skill-card-info" style="min-width:240px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
               <h4 style="margin:0;">&#127916; /remotion-best-practices</h4>
               <span style="font-size:0.75rem; color:var(--text-secondary);">135K installs</span>
@@ -1566,8 +1570,8 @@ allowed-tools: Read, Grep, Bash
             <p style="font-size:0.8rem; color:var(--text-dim); margin:0 0 4px;">remotion-dev/skills</p>
             <p style="font-size:0.85rem; color:var(--text-secondary); margin:0;">React 기반 영상 제작 모범 사례. 성능 최적화, 렌더링 패턴 가이드.</p>
           </div>
-          <pre style="flex:1; margin:0;"><code>npx skills add https://github.com/remotion-dev/skills \
-  --skill remotion-best-practices</code></pre>
+          <pre class="skill-card-pre" style="width:430px; flex-shrink:0; margin:0;"><code>npx skills add https://github.com/remotion-dev/skills \
+  --skill remotion-best-practices</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
       </div>
     </div>
@@ -1594,7 +1598,7 @@ allowed-tools: Read, Grep, Bash
       </div>
 
       <h3 style="font-size:1.1rem; margin-bottom:20px; color:var(--accent);">많이 만드는 에이전트 예시</h3>
-      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));">
         <div class="feature-card">
           <div class="feature-icon" style="background:rgba(126,200,155,0.15); color:var(--accent-green);">&#128270;</div>
           <h4>Code Reviewer</h4>
@@ -1652,94 +1656,82 @@ allowed-tools: Read, Grep, Bash
       </div>
 
       <div style="display:flex; flex-direction:column; gap:12px;">
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(126,200,155,0.15); color:var(--accent-green); flex-shrink:0;">&#128025;</div>
-            <div><h4 style="margin:0;">GitHub</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">이슈, PR 생성/리뷰, 코드 검색, 리포지토리 관리.</p></div>
+            <div><h4 style="margin:0;">GitHub</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">이슈, PR 생성/리뷰, 코드 검색, 리포지토리 관리.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport http \
-  github https://api.githubcopilot.com/mcp/</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport http github https://api.githubcopilot.com/mcp/</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(232,136,136,0.15); color:var(--accent-red); flex-shrink:0;">&#128027;</div>
-            <div><h4 style="margin:0;">Sentry</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">에러 모니터링, 이슈 추적, 스택 트레이스 분석.</p></div>
+            <div><h4 style="margin:0;">Sentry</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">에러 모니터링, 이슈 추적, 스택 트레이스 분석.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport http \
-  sentry https://mcp.sentry.dev/sse</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport http sentry https://mcp.sentry.dev/sse</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(126,184,218,0.15); color:var(--accent-secondary); flex-shrink:0;">&#128451;</div>
-            <div><h4 style="margin:0;">PostgreSQL</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">DB 스키마 조회, 쿼리 실행, 데이터 분석.</p></div>
+            <div><h4 style="margin:0;">PostgreSQL</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">DB 스키마 조회, 쿼리 실행, 데이터 분석.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport stdio postgres \
-  --env DATABASE_URL=postgresql://... \
-  -- npx -y @anthropic/mcp-postgres</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport stdio postgres --env DATABASE_URL=postgresql://... -- npx -y @anthropic/mcp-postgres</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(212,165,116,0.15); color:var(--accent); flex-shrink:0;">&#128196;</div>
-            <div><h4 style="margin:0;">Notion</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">데이터베이스, 페이지 조회 및 편집. 문서화 연동.</p></div>
+            <div><h4 style="margin:0;">Notion</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">데이터베이스, 페이지 조회 및 편집. 문서화 연동.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport http \
-  notion https://mcp.notion.com/mcp</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport http notion https://mcp.notion.com/mcp</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(180,156,222,0.15); color:var(--accent-purple); flex-shrink:0;">&#128172;</div>
-            <div><h4 style="margin:0;">Slack</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">채널 메시지 조회, 알림 전송, 팀 커뮤니케이션 자동화.</p></div>
+            <div><h4 style="margin:0;">Slack</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">채널 메시지 조회, 알림 전송, 팀 커뮤니케이션 자동화.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport http \
-  slack https://mcp.slack.com/sse</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport http slack https://mcp.slack.com/sse</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(232,212,136,0.15); color:var(--accent-yellow); flex-shrink:0;">&#128200;</div>
-            <div><h4 style="margin:0;">Linear</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">이슈 트래킹, 스프린트 관리, 개발 워크플로우 통합.</p></div>
+            <div><h4 style="margin:0;">Linear</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">이슈 트래킹, 스프린트 관리, 개발 워크플로우 통합.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport http \
-  linear https://mcp.linear.app/sse</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport http linear https://mcp.linear.app/sse</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(126,200,155,0.15); color:var(--accent-green); flex-shrink:0;">&#128176;</div>
-            <div><h4 style="margin:0;">Stripe</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">결제 데이터 조회, 고객 관리, 결제 시스템 디버깅.</p></div>
+            <div><h4 style="margin:0;">Stripe</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">결제 데이터 조회, 고객 관리, 결제 시스템 디버깅.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport http \
-  stripe https://mcp.stripe.com</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport http stripe https://mcp.stripe.com</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(126,184,218,0.15); color:var(--accent-secondary); flex-shrink:0;">&#127760;</div>
-            <div><h4 style="margin:0;">Playwright</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">웹 브라우저 자동화. E2E 테스트, 스크린샷, 스크래핑.</p></div>
+            <div><h4 style="margin:0;">Playwright</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">웹 브라우저 자동화. E2E 테스트, 스크린샷, 스크래핑.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport stdio playwright \
-  -- npx -y @anthropic/mcp-playwright</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport stdio playwright -- npx -y @anthropic/mcp-playwright</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(126,200,155,0.15); color:var(--accent-green); flex-shrink:0;">&#9889;</div>
-            <div><h4 style="margin:0;">Supabase</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">DB 쿼리, Auth 설정, Storage 접근, 백엔드 개발 자동화.</p></div>
+            <div><h4 style="margin:0;">Supabase</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">DB 쿼리, Auth 설정, Storage 접근, 백엔드 개발 자동화.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport http \
-  supabase https://mcp.supabase.com/mcp</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport http supabase https://mcp.supabase.com/mcp</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(180,156,222,0.15); color:var(--accent-purple); flex-shrink:0;">&#128218;</div>
-            <div><h4 style="margin:0;">Context7</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">최신 공식 문서를 실시간으로 로드. 최신 API 레퍼런스 제공.</p></div>
+            <div><h4 style="margin:0;">Context7</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">최신 공식 문서를 실시간으로 로드. 최신 API 레퍼런스 제공.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport stdio context7 \
-  -- npx -y @upstash/context7-mcp</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport stdio context7 -- npx -y @upstash/context7-mcp</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
-        <div class="feature-card" style="display:flex; align-items:flex-start; gap:24px;">
-          <div style="display:flex; align-items:center; gap:12px; min-width:200px;">
+        <div class="feature-card">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
             <div class="feature-icon" style="background:rgba(126,184,218,0.15); color:var(--accent-secondary); flex-shrink:0;">&#128451;</div>
-            <div><h4 style="margin:0;">Neon</h4><p style="margin:4px 0 0; font-size:0.85rem; color:var(--text-secondary);">서버리스 PostgreSQL. 브랜치 기반 DB, 마이그레이션 자동화.</p></div>
+            <div><h4 style="margin:0;">Neon</h4><p style="margin:2px 0 0; font-size:0.85rem; color:var(--text-secondary);">서버리스 PostgreSQL. 브랜치 기반 DB, 마이그레이션 자동화.</p></div>
           </div>
-          <pre style="flex:1; margin:0;"><code>claude mcp add --transport http \
-  neon https://mcp.neon.tech/sse</code></pre>
+          <pre style="margin:0; padding:12px 16px; white-space:nowrap; overflow-x:auto;"><code>claude mcp add --transport http neon https://mcp.neon.tech/sse</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
         </div>
       </div>
 
@@ -1775,7 +1767,7 @@ allowed-tools: Read, Grep, Bash
         <p>Claude Code를 더 효과적으로 사용하기 위한 실전 팁</p>
       </div>
 
-      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));">
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));">
         <div class="feature-card">
           <h4 style="color:var(--accent-green)">&#9997; CLAUDE.md 적극 활용</h4>
           <p>프로젝트 루트에 CLAUDE.md를 만들어 아키텍처, 코딩 규칙, 기술 스택을 정의하세요. Claude가 프로젝트 맥락을 이해하고 더 정확한 코드를 작성합니다.</p>
