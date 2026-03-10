@@ -571,7 +571,14 @@
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
     .shortcut-row:last-child { border-bottom: none; }
-    .shortcut-desc { color: var(--text-secondary); font-size: 0.88rem; }
+    .shortcut-desc { color: var(--text-secondary); font-size: 0.88rem; flex: 1; }
+    .shortcut-keys {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      margin-left: 12px;
+    }
 
     /* ── Tabs ── */
     .tabs {
@@ -714,6 +721,7 @@
       <li><a href="#commands">Commands</a></li>
       <li><a href="#shortcuts">Shortcuts</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#agents">Agents</a></li>
       <li><a href="#mcp">MCP</a></li>
       <li><a href="#tips">Tips</a></li>
     </ul>
@@ -848,7 +856,17 @@ claude
 claude --model opus
 
 # 이전 세션 이어하기
-claude --continue</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
+claude --continue
+
+# 권한 확인 없이 자동 실행 (bypass 모드) — CI/자동화 환경에서 유용
+claude --dangerously-skip-permissions
+
+# Chrome 브라우저 제어 모드로 시작 (Beta, Chrome 확장 프로그램 필요)
+claude --chrome</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
+
+              <div class="warn-box">
+                <strong>주의:</strong> <span class="inline-code">--dangerously-skip-permissions</span>는 파일 수정·명령 실행 등 모든 작업을 승인 없이 자동으로 처리합니다. 신뢰할 수 있는 환경에서만 사용하세요.
+              </div>
 
               <h4>Step 4 &mdash; 프로젝트 초기화 (권장)</h4>
               <pre><code># CLAUDE.md 생성 &mdash; 프로젝트 규칙/아키텍처/스타일 정의
@@ -1154,6 +1172,11 @@ claude --remote "로그인 버그 수정해줘"</code><button class="copy-btn" a
             <span class="cmd-tag tag-power">Power</span>
           </div>
           <div class="cmd-card">
+            <div class="cmd-name" style="color:var(--accent-purple)">/chrome</div>
+            <div class="cmd-desc">Chrome 확장 프로그램과 연동하여 브라우저를 직접 제어. 웹 탐색, 폼 입력, 스크린샷, GIF 녹화, 콘솔/네트워크 디버깅 가능 (Beta).</div>
+            <span class="cmd-tag tag-advanced">Advanced</span>
+          </div>
+          <div class="cmd-card">
             <div class="cmd-name" style="color:var(--accent-purple)">/remote-control</div>
             <div class="cmd-desc">로컬 세션을 웹 브라우저/폰에서 접속 가능하게 만듦. QR 코드 생성. (/rc)</div>
             <span class="cmd-tag tag-advanced">Advanced</span>
@@ -1171,6 +1194,11 @@ claude --remote "로그인 버그 수정해줘"</code><button class="copy-btn" a
           <div class="cmd-card">
             <div class="cmd-name" style="color:var(--accent-purple)">/plan</div>
             <div class="cmd-desc">Plan 모드 진입. 코드 수정 없이 읽기만 하면서 계획을 세움.</div>
+            <span class="cmd-tag tag-advanced">Advanced</span>
+          </div>
+          <div class="cmd-card">
+            <div class="cmd-name" style="color:var(--accent-purple)">/agents</div>
+            <div class="cmd-desc">전문화된 서브에이전트를 생성하고 관리. 각 에이전트는 독립된 컨텍스트 윈도우, 커스텀 시스템 프롬프트, 전용 도구를 가짐. Code Reviewer, Security Reviewer, Tech Lead 등 생성 가능.</div>
             <span class="cmd-tag tag-advanced">Advanced</span>
           </div>
           <div class="cmd-card">
@@ -1374,41 +1402,41 @@ claude --model claude-sonnet-4-6[1m]</code></pre>
         <!-- General -->
         <div class="feature-card">
           <h4 style="color:var(--accent-green)">일반 제어</h4>
-          <div class="shortcut-row"><span class="shortcut-desc">실행 취소 / 생성 중단</span><kbd>Ctrl</kbd>+<kbd>C</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">세션 종료</span><kbd>Ctrl</kbd>+<kbd>D</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">상세 출력 토글 (Thinking 보기)</span><kbd>Ctrl</kbd>+<kbd>O</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">클립보드 이미지 붙여넣기</span><kbd>Ctrl</kbd>+<kbd>V</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">기본 에디터에서 프롬프트 작성</span><kbd>Ctrl</kbd>+<kbd>G</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">배경 작업 전환</span><kbd>Ctrl</kbd>+<kbd>B</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">되감기 / 요약</span><kbd>Esc</kbd>+<kbd>Esc</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">실행 취소 / 생성 중단</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>C</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">세션 종료</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>D</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">상세 출력 토글 (Thinking 보기)</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>O</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">클립보드 이미지 붙여넣기</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>V</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">기본 에디터에서 프롬프트 작성</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>G</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">배경 작업 전환</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>B</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">되감기 / 요약</span><span class="shortcut-keys"><kbd>Esc</kbd>+<kbd>Esc</kbd></span></div>
         </div>
         <!-- Model/Mode -->
         <div class="feature-card">
           <h4 style="color:var(--accent-purple)">모델 &amp; 모드</h4>
-          <div class="shortcut-row"><span class="shortcut-desc">모델 전환</span><kbd>Alt</kbd>+<kbd>P</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">Extended Thinking 토글</span><kbd>Alt</kbd>+<kbd>T</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">권한 모드 순환</span><kbd>Shift</kbd>+<kbd>Tab</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">태스크 목록 토글</span><kbd>Ctrl</kbd>+<kbd>T</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">모든 배경 에이전트 종료</span><kbd>Ctrl</kbd>+<kbd>F</kbd> &times;2</div>
+          <div class="shortcut-row"><span class="shortcut-desc">모델 전환</span><span class="shortcut-keys"><kbd>Alt</kbd>+<kbd>P</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Extended Thinking 토글</span><span class="shortcut-keys"><kbd>Alt</kbd>+<kbd>T</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">권한 모드 순환</span><span class="shortcut-keys"><kbd>Shift</kbd>+<kbd>Tab</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">태스크 목록 토글</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>T</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">모든 배경 에이전트 종료</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>F</kbd><span style="font-size:0.8rem;color:var(--text-secondary);">×2</span></span></div>
         </div>
         <!-- Editing -->
         <div class="feature-card">
           <h4 style="color:var(--accent-secondary)">입력 편집</h4>
-          <div class="shortcut-row"><span class="shortcut-desc">줄 끝까지 삭제</span><kbd>Ctrl</kbd>+<kbd>K</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">줄 전체 삭제</span><kbd>Ctrl</kbd>+<kbd>U</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">삭제한 텍스트 붙여넣기</span><kbd>Ctrl</kbd>+<kbd>Y</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">단어 뒤로 이동</span><kbd>Alt</kbd>+<kbd>B</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">단어 앞으로 이동</span><kbd>Alt</kbd>+<kbd>F</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">줄바꿈 (멀티라인)</span><kbd>Shift</kbd>+<kbd>Enter</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">줄 끝까지 삭제</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>K</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">줄 전체 삭제</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>U</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">삭제한 텍스트 붙여넣기</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>Y</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">단어 뒤로 이동</span><span class="shortcut-keys"><kbd>Alt</kbd>+<kbd>B</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">단어 앞으로 이동</span><span class="shortcut-keys"><kbd>Alt</kbd>+<kbd>F</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">줄바꿈 (멀티라인)</span><span class="shortcut-keys"><kbd>Shift</kbd>+<kbd>Enter</kbd></span></div>
         </div>
         <!-- Quick Access -->
         <div class="feature-card">
           <h4 style="color:var(--accent)">빠른 접근</h4>
-          <div class="shortcut-row"><span class="shortcut-desc">명령어/스킬 메뉴</span><kbd>/</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">Bash 직접 실행</span><kbd>!</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">파일 경로 자동완성</span><kbd>@</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">명령어 히스토리 탐색</span><kbd>&uarr;</kbd> / <kbd>&darr;</kbd></div>
-          <div class="shortcut-row"><span class="shortcut-desc">명령어 역검색</span><kbd>Ctrl</kbd>+<kbd>R</kbd></div>
+          <div class="shortcut-row"><span class="shortcut-desc">명령어/스킬 메뉴</span><span class="shortcut-keys"><kbd>/</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">Bash 직접 실행</span><span class="shortcut-keys"><kbd>!</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">파일 경로 자동완성</span><span class="shortcut-keys"><kbd>@</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">명령어 히스토리 탐색</span><span class="shortcut-keys"><kbd>↑</kbd>/<kbd>↓</kbd></span></div>
+          <div class="shortcut-row"><span class="shortcut-desc">명령어 역검색</span><span class="shortcut-keys"><kbd>Ctrl</kbd>+<kbd>R</kbd></span></div>
         </div>
       </div>
     </div>
@@ -1452,6 +1480,18 @@ claude --model claude-sonnet-4-6[1m]</code></pre>
           <pre><code>/loop 5m 배포 상태 확인해줘
 /loop 30m /simplify</code></pre>
         </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(232,212,136,0.15); color:var(--accent-yellow);">&#9000;</div>
+          <h4>/keybindings-help</h4>
+          <p>키보드 단축키를 커스터마이징합니다. chord 바인딩 추가, 제출 키 변경, <span class="inline-code">~/.claude/keybindings.json</span> 수정을 도와줍니다.</p>
+          <pre><code>/keybindings-help</code></pre>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(180,156,222,0.15); color:var(--accent-purple);">&#128218;</div>
+          <h4>/claude-code-guide</h4>
+          <p>Claude Code CLI 기능, hooks, slash 명령어, MCP 서버, 설정, IDE 연동에 대한 질문에 답합니다.</p>
+          <pre><code>/claude-code-guide</code></pre>
+        </div>
       </div>
 
       <h3 style="font-size:1.1rem; margin-bottom:20px; color:var(--accent);">커스텀 Skill 만들기</h3>
@@ -1476,32 +1516,128 @@ allowed-tools: Read, Grep, Bash
         </p>
       </div>
 
-      <h3 style="font-size:1.1rem; margin:40px 0 20px; color:var(--accent);">커뮤니티에서 많이 만드는 커스텀 Skills</h3>
+      <h3 style="font-size:1.1rem; margin:40px 0 8px; color:var(--accent);">외부 Skills (skills.sh 인기 순위)</h3>
+      <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:20px;">
+        <a href="https://skills.sh" target="_blank" rel="noopener" style="color:var(--accent);">skills.sh</a>에서 커뮤니티 스킬을 검색하고 설치할 수 있습니다.
+      </p>
       <div class="card-grid">
         <div class="feature-card">
-          <h4>&#128736; /deploy-check</h4>
-          <p>배포 전 린트, 테스트, 빌드를 순서대로 실행하고 결과를 요약합니다.</p>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h4 style="margin:0;">&#128270; /find-skills</h4>
+            <span style="font-size:0.75rem; color:var(--text-secondary);">482K installs</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">vercel-labs/skills</p>
+          <p>skills.sh에서 필요한 스킬을 검색하고 발견합니다. 커뮤니티 스킬 탐색의 출발점.</p>
+          <pre><code>npx skills add https://github.com/vercel-labs/skills \
+  --skill find-skills</code></pre>
         </div>
         <div class="feature-card">
-          <h4>&#128221; /commit</h4>
-          <p>변경사항을 분석하여 Conventional Commits 형식의 커밋 메시지를 자동 생성합니다.</p>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h4 style="margin:0;">&#9889; /vercel-react-best-practices</h4>
+            <span style="font-size:0.75rem; color:var(--text-secondary);">192K installs</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">vercel-labs/agent-skills</p>
+          <p>Vercel 엔지니어링의 React &amp; Next.js 성능 최적화 가이드라인 적용. 번들 최적화, 데이터 패칭 패턴 검토.</p>
+          <pre><code>npx skills add https://github.com/vercel-labs/agent-skills \
+  --skill vercel-react-best-practices</code></pre>
         </div>
         <div class="feature-card">
-          <h4>&#128640; /pr-summary</h4>
-          <p>PR diff와 커밋 히스토리를 분석하여 리뷰어를 위한 상세 요약을 작성합니다.</p>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h4 style="margin:0;">&#128065; /web-design-guidelines</h4>
+            <span style="font-size:0.75rem; color:var(--text-secondary);">150K installs</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">vercel-labs/agent-skills</p>
+          <p>UI 코드를 웹 인터페이스 가이드라인 기준으로 리뷰합니다. 접근성, UX, 디자인 모범 사례 자동 검사.</p>
+          <pre><code>npx skills add https://github.com/vercel-labs/agent-skills \
+  --skill web-design-guidelines</code></pre>
         </div>
         <div class="feature-card">
-          <h4>&#128295; /debug-error</h4>
-          <p>에러 로그를 분석하고 스택 트레이스를 추적하여 근본 원인과 수정 방안을 제시합니다.</p>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h4 style="margin:0;">&#127912; /frontend-design</h4>
+            <span style="font-size:0.75rem; color:var(--text-secondary);">138K installs</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">anthropics/skills</p>
+          <p>프론트엔드 디자인 패턴과 컴포넌트 설계 가이드라인을 적용합니다. Anthropic 공식 제공 스킬.</p>
+          <pre><code>npx skills add https://github.com/anthropics/skills \
+  --skill frontend-design</code></pre>
         </div>
         <div class="feature-card">
-          <h4>&#127919; /test-gen</h4>
-          <p>지정된 파일이나 함수에 대한 유닛 테스트를 자동 생성합니다.</p>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h4 style="margin:0;">&#127916; /remotion-best-practices</h4>
+            <span style="font-size:0.75rem; color:var(--text-secondary);">135K installs</span>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px;">remotion-dev/skills</p>
+          <p>Remotion을 사용한 React 기반 영상 제작 모범 사례. 성능 최적화, 렌더링 패턴 가이드.</p>
+          <pre><code>npx skills add https://github.com/remotion-dev/skills \
+  --skill remotion-best-practices</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION: Agents -->
+  <!-- ============================================ -->
+  <section id="agents">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-divider"></div>
+        <h2>/agents — 서브에이전트 관리</h2>
+        <p>전문화된 AI 에이전트를 생성하고 Claude가 작업을 위임하게 만드세요</p>
+      </div>
+
+      <div class="feature-card" style="max-width:800px; margin-bottom:40px;">
+        <p style="margin-bottom:16px;">
+          <span class="inline-code">/agents</span>를 실행하면 전문화된 서브에이전트를 만들 수 있습니다. 각 에이전트는 <strong>독립된 컨텍스트 윈도우</strong>, <strong>커스텀 시스템 프롬프트</strong>, <strong>지정된 도구</strong>만을 가집니다. Claude는 작업 유형에 따라 적합한 에이전트에 자동으로 위임합니다.
+        </p>
+        <pre><code># 대화 중에 실행
+/agents
+# → "Create new agent" 선택 후 에이전트 설정</code><button class="copy-btn" aria-label="Copy code" onclick="copyCode(this)">Copy</button></pre>
+      </div>
+
+      <h3 style="font-size:1.1rem; margin-bottom:20px; color:var(--accent);">많이 만드는 에이전트 예시</h3>
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(126,200,155,0.15); color:var(--accent-green);">&#128270;</div>
+          <h4>Code Reviewer</h4>
+          <p>코드 품질, 버그 가능성, 성능 이슈를 전문적으로 리뷰합니다. 팀 컨벤션과 모범 사례 기반으로 피드백 제공.</p>
+          <span class="cmd-tag tag-essential" style="font-size:0.7rem;">추천</span>
         </div>
         <div class="feature-card">
-          <h4>&#128196; /doc-gen</h4>
-          <p>코드베이스를 분석하여 API 문서, README, 또는 JSDoc 주석을 생성합니다.</p>
+          <div class="feature-icon" style="background:rgba(232,136,136,0.15); color:var(--accent-red);">&#128737;</div>
+          <h4>Security Reviewer</h4>
+          <p>OWASP Top 10, SQL 인젝션, XSS, 인증/인가 취약점을 집중 분석합니다. 보안 전문 지식으로 코드 감사.</p>
+          <span class="cmd-tag tag-essential" style="font-size:0.7rem;">추천</span>
         </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(212,165,116,0.15); color:var(--accent);">&#127959;</div>
+          <h4>Tech Lead</h4>
+          <p>아키텍처 결정, 기술 부채 평가, 확장성 검토를 담당합니다. 시니어 개발자 관점에서 설계 방향을 제시.</p>
+          <span class="cmd-tag tag-essential" style="font-size:0.7rem;">추천</span>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(180,156,222,0.15); color:var(--accent-purple);">&#127912;</div>
+          <h4>UX Reviewer</h4>
+          <p>사용자 경험, 접근성(a11y), UI 일관성을 리뷰합니다. 사용자 중심 관점으로 인터페이스 개선점 도출.</p>
+          <span class="cmd-tag tag-essential" style="font-size:0.7rem;">추천</span>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(126,184,218,0.15); color:var(--accent-secondary);">&#9881;</div>
+          <h4>Code Simplifier</h4>
+          <p>복잡한 코드를 단순화하고 중복을 제거합니다. 가독성과 유지보수성을 높이는 방향으로 리팩토링 제안.</p>
+          <span class="cmd-tag tag-power" style="font-size:0.7rem;">인기</span>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(232,212,136,0.15); color:var(--accent-yellow);">&#127919;</div>
+          <h4>Test Writer</h4>
+          <p>유닛 테스트, 통합 테스트, E2E 테스트를 전문으로 작성합니다. 테스트 커버리지 분석 및 엣지 케이스 발굴.</p>
+          <span class="cmd-tag tag-power" style="font-size:0.7rem;">인기</span>
+        </div>
+      </div>
+
+      <div class="tip-box" style="margin-top:32px;">
+        <strong>에이전트 vs Skills 차이:</strong><br>
+        <strong>Agents</strong>는 독립 컨텍스트를 가진 전문화된 AI로, Claude가 자동으로 위임합니다. <strong>Skills</strong>는 사용자가 직접 <span class="inline-code">/skill-name</span>으로 호출하는 재사용 가능한 프롬프트 템플릿입니다.
       </div>
     </div>
   </section>
@@ -1574,6 +1710,27 @@ allowed-tools: Read, Grep, Bash
           <p>웹 브라우저 자동화. E2E 테스트, 스크린샷, 웹 스크래핑.</p>
           <pre><code>claude mcp add --transport stdio playwright \
   -- npx -y @anthropic/mcp-playwright</code></pre>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(126,200,155,0.15); color:var(--accent-green);">&#9889;</div>
+          <h4>Supabase</h4>
+          <p>Supabase 프로젝트 관리, 데이터베이스 쿼리, Auth 설정, Storage 접근. PostgreSQL 기반 백엔드 개발 자동화.</p>
+          <pre><code>claude mcp add --transport http \
+  supabase https://mcp.supabase.com/mcp</code></pre>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(180,156,222,0.15); color:var(--accent-purple);">&#128218;</div>
+          <h4>Context7</h4>
+          <p>라이브러리와 프레임워크의 최신 공식 문서를 실시간으로 가져옵니다. 오래된 학습 데이터 대신 최신 API 레퍼런스를 Claude에 제공.</p>
+          <pre><code>claude mcp add --transport stdio context7 \
+  -- npx -y @upstash/context7-mcp</code></pre>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(126,184,218,0.15); color:var(--accent-secondary);">&#128451;</div>
+          <h4>Neon</h4>
+          <p>서버리스 PostgreSQL 관리. 브랜치 기반 DB 워크플로우, 쿼리 실행, 스키마 마이그레이션 자동화.</p>
+          <pre><code>claude mcp add --transport http \
+  neon https://mcp.neon.tech/sse</code></pre>
         </div>
       </div>
 
